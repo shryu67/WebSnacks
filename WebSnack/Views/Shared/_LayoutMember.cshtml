@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 我的 ASP.NET 應用程式</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+    <section class="hero" id="intro">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-right navicon">
+                    <a id="nav-toggle" class="nav_slide_button" href="#"><span></span></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center inner">
+                    <div class="animatedParent">
+                        <h1 class="animated fadeInDown">MUSIM BOCOR</h1>
+                        <p class="animated fadeInUp">Udah dari dulu tahu kalo bocor kenapa nggak ditambal tong</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                    <a href="#about" class="learn-more-btn btn-scroll">Learn more</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @*<div class="navbar navbar-inverse navbar-fixed-top">*@
+    <div id="navigation">
+        <nav class="navbar navbar-custom" role="navigation">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="site-logo">
+                            @Html.ActionLink("J.K.Snacks", "Index", "Home", new { area = "" }, new { @class = "brand" })
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                        </div>
+                        <div class="navbar-collapse collapse" id="menu">
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("首頁", "Index", "Home")</li>
+                                <li>@Html.ActionLink("購物車", "ShoppingCar", "Home")</li>
+                                <li>@Html.ActionLink("訂單查詢", "OrderList", "Home")</li>
+                                <li>@Html.ActionLink("關於", "About", "Home")</li>
+                                <li>@Html.ActionLink("連絡人", "Contact", "Home")</li>
+                                <li><a href="#">@Session["WelCome"]</a></li>
+                            </ul>
+                            @Html.Partial("_LoginPartial")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 應用程式</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/js")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        $(function () {
+            $('.datetimepicker').datepicker({
+                format: "yyyy/mm/dd",
+                startDate: "",
+                autoclose: true,
+                clearBtn: true,
+                calendarWeeks: true,
+                todayHighlight: true,
+                language: 'zh-TW'
+            });
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

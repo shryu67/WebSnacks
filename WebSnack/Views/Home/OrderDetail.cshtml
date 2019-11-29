@@ -1,0 +1,81 @@
+﻿@model IEnumerable<WebSnack.Models.z_bas_orders_d>
+
+@{
+    ViewBag.Title = "訂單明細";
+}
+
+<h2>訂單明細</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.mno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.amounts)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.remark)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mIsApproved)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.mno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.userid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.qty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.amounts)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.remark)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mIsApproved)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.rowid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.rowid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.rowid })
+        </td>*@
+    </tr>
+}
+
+</table>

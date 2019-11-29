@@ -1,0 +1,76 @@
+﻿@model IEnumerable<WebSnack.Models.z_bas_orders>
+
+@{
+    ViewBag.Title = "會員訂單列表";
+}
+
+<h2>會員訂單列表</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.mno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.totals)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mReceiver)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.remark)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.mno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mdate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.userid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.totals)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mReceiver)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.remark)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.rowid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.rowid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.rowid })*@
+            <a href="@Url.Action("OrderDetail")?mno=@item.mno" class="btn btn-info">訂單明細</a>
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SnackDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="z_bas_goods">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mno" Type="nvarchar" MaxLength="50" />
+          <Property Name="mname" Type="nvarchar" MaxLength="50" />
+          <Property Name="mtype" Type="nvarchar" MaxLength="50" />
+          <Property Name="mspec" Type="nvarchar" MaxLength="250" />
+          <Property Name="mdate" Type="date" />
+          <Property Name="mimg" Type="nvarchar" MaxLength="50" />
+          <Property Name="qty_stock" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="price_sale" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="price_discount" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="price_cost" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="remark" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="z_bas_orders">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mno" Type="nvarchar" MaxLength="50" />
+          <Property Name="mdate" Type="nvarchar" MaxLength="50" />
+          <Property Name="userid" Type="nvarchar" MaxLength="50" />
+          <Property Name="totals" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="mReceiver" Type="nvarchar" MaxLength="50" />
+          <Property Name="mEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="mAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="remark" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="z_bas_orders_d">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mno" Type="nvarchar" MaxLength="50" />
+          <Property Name="userid" Type="nvarchar" MaxLength="50" />
+          <Property Name="gno" Type="nvarchar" MaxLength="50" />
+          <Property Name="gname" Type="nvarchar" MaxLength="50" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="qty" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="amounts" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="remark" Type="nvarchar" MaxLength="50" />
+          <Property Name="mIsApproved" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="SnackDBModelStoreContainer">
+          <EntitySet Name="z_bas_goods" EntityType="Self.z_bas_goods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="z_bas_orders" EntityType="Self.z_bas_orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="z_bas_orders_d" EntityType="Self.z_bas_orders_d" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SnackDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="z_bas_goods">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mtype" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mspec" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="mdate" Type="DateTime" Precision="0" />
+          <Property Name="mimg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="qty_stock" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="price_sale" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="price_discount" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="price_cost" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="z_bas_orders">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mdate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="totals" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="mReceiver" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="z_bas_orders_d">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="gno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="gname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="qty" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="amounts" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mIsApproved" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="SnackDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="z_bas_goods" EntityType="Self.z_bas_goods" />
+          <EntitySet Name="z_bas_orders" EntityType="Self.z_bas_orders" />
+          <EntitySet Name="z_bas_orders_d" EntityType="Self.z_bas_orders_d" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SnackDBModelStoreContainer" CdmEntityContainer="SnackDBEntities">
+          <EntitySetMapping Name="z_bas_goods">
+            <EntityTypeMapping TypeName="SnackDBModel.z_bas_goods">
+              <MappingFragment StoreEntitySet="z_bas_goods">
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+                <ScalarProperty Name="mno" ColumnName="mno" />
+                <ScalarProperty Name="mname" ColumnName="mname" />
+                <ScalarProperty Name="mtype" ColumnName="mtype" />
+                <ScalarProperty Name="mspec" ColumnName="mspec" />
+                <ScalarProperty Name="mdate" ColumnName="mdate" />
+                <ScalarProperty Name="mimg" ColumnName="mimg" />
+                <ScalarProperty Name="qty_stock" ColumnName="qty_stock" />
+                <ScalarProperty Name="price_sale" ColumnName="price_sale" />
+                <ScalarProperty Name="price_discount" ColumnName="price_discount" />
+                <ScalarProperty Name="price_cost" ColumnName="price_cost" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="z_bas_orders">
+            <EntityTypeMapping TypeName="SnackDBModel.z_bas_orders">
+              <MappingFragment StoreEntitySet="z_bas_orders">
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+                <ScalarProperty Name="mno" ColumnName="mno" />
+                <ScalarProperty Name="mdate" ColumnName="mdate" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="totals" ColumnName="totals" />
+                <ScalarProperty Name="mReceiver" ColumnName="mReceiver" />
+                <ScalarProperty Name="mEmail" ColumnName="mEmail" />
+                <ScalarProperty Name="mAddress" ColumnName="mAddress" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="z_bas_orders_d">
+            <EntityTypeMapping TypeName="SnackDBModel.z_bas_orders_d">
+              <MappingFragment StoreEntitySet="z_bas_orders_d">
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+                <ScalarProperty Name="mno" ColumnName="mno" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="gno" ColumnName="gno" />
+                <ScalarProperty Name="gname" ColumnName="gname" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="amounts" ColumnName="amounts" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="mIsApproved" ColumnName="mIsApproved" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

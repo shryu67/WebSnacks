@@ -1,0 +1,117 @@
+﻿@model IEnumerable<WebSnack.Models.z_bas_orders_d>
+
+@{
+    ViewBag.Title = "會員購物車清單";
+}
+
+<h2>會員購物車清單</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.mno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.amounts)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.remark)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mIsApproved)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.mno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.userid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.amounts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.remark)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mIsApproved)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.rowid }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.rowid }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.rowid })*@
+                <a href="@Url.Action("DeleteCar")?rowid=@item.rowid" class="btn btn-danger">刪除購物車</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<form action="@Url.Action("ShoppingCar")" method="post">
+    <div class="form-horizontal">
+        <h4>填寫訂單收件人資料</h4>
+        <hr />
+
+        <div class="form-group">
+            <span class="control-label col-md-2">收件人姓名</span>
+            <div class="col-md-10">
+                <input type="text" id="mReceiver" name="mReceiver" required="required" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="control-label col-md-2">收件人信箱</span>
+            <div class="col-md-10">
+                <input type="text" id="mEmail" name="mEmail" required="required" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="control-label col-md-2">收件人地址</span>
+            <div class="col-md-10">
+                <input type="text" id="mAddress" name="mAddress" required="required" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10 col-md-offset-2">
+                <input type="submit" value="確認結帳" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
