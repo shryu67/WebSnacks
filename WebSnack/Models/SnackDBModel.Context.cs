@@ -26,6 +26,7 @@ namespace WebSnack.Models
         }
     
         public virtual DbSet<z_bas_goods> z_bas_goods { get; set; }
+        public virtual DbSet<z_bas_goods_type> z_bas_goods_type { get; set; }
         public virtual DbSet<z_bas_orders> z_bas_orders { get; set; }
         public virtual DbSet<z_bas_orders_d> z_bas_orders_d { get; set; }
     }

@@ -4,31 +4,132 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-lg-4">
-            <div class="thumbnail">
-                <img src="~/img/@item.mimg" style="width:70%" />
-                <div class="caption">
-                    <h2>@item.mname</h2>
-                    <p>單價:@item.price_sale</p>
-                    @if (Request.IsAuthenticated)
-                    {
-                        <p><a href="@Url.Action("AddCar")?mno=@item.mno" class="btn btn-primary">加入購物車</a></p>
-                    }
-                    else
-                    {
-                        <p></p>
-                    }
+@*<div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4">
+                <div class="thumbnail">
+                    <img src="~/img/@item.mimg" style="width:70%" />
+                    <div class="caption">
+                        <h2>@item.mname</h2>
+                        <p>單價:@item.price_sale</p>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <p><a href="@Url.Action("AddCar")?mno=@item.mno" class="btn btn-primary">加入購物車</a></p>
+                        }
+                        else
+                        {
+                            <p></p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>*@
+<!-- Section: services -->
+<section id="service" class="home-section color-dark bg-gray">
+    <div class="container marginbot-50">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div>
+                    <div class="section-heading text-center">
+                        <h2 class="h-bold">What we can do for you</h2>
+                        <div class="divider-header"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    }
-</div>
 
+    </div>
+    <div class="text-center">
+        <div class="container">
+            <div class="row animatedParent">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 margintop-40">
+                        <div class="animated rotateInDownLeft">
+                            <div class="service-box">
+                                <div class="service-icon">
+                                    <img src="~/img/goods/@item.mimg" style="width:70%" />
+                                </div>
+                                <div class="service-desc">
+                                    <h5>@item.mname</h5>
+                                    <div class="divider-header"></div>
+                                    @*<p>
+                                            Ad denique euripidis signiferumque vim, iusto admodum quo cu. No tritani neglegentur mediocritatem
+                                            duo.
+                                        </p>*@
+                                    <p>單價:@Convert.ToInt32(item.price_sale)</p>
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        <p><a href="@Url.Action("AddCar")?mno=@item.mno" class="btn btn-skin">加入購物車</a></p>
+                                    }
+                                    else
+                                    {
+                                        <p></p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /Section: services -->
+<!-- Section: works -->
+@*<section id="works" class="home-section color-dark text-center bg-white">
+    <div class="container marginbot-50">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div>
+                    <div class="animatedParent">
+                        <div class="section-heading text-center">
+                            <h2 class="h-bold animated bounceInDown">What we have done</h2>
+                            <div class="divider-header"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+
+            <div class="row animatedParent">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+
+                    <div class="row gallery-item">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-md-3 animated fadeInUp">
+                                <a href="~/img/goods/@item.mimg" title="@item.mname" data-lightbox-gallery="gallery1">
+                                    <img src="~/img/goods/@item.mimg" class="img-responsive" alt="img">
+                                    <h5>@item.mname</h5>
+                                    <p>單價:@Convert.ToInt32(item.price_sale)</p>
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        <p><a href="@Url.Action("AddCar")?mno=@item.mno" class="btn btn-skin">加入購物車</a></p>
+                                    }
+                                    else
+                                    {
+                                        <p></p>
+                                    }
+                                </a>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+</section>*@
+<!-- /Section: works -->
 <!-- Section: services -->
-<section id="service" class="home-section color-dark bg-gray">
+@*<section id="service" class="home-section color-dark bg-gray">
     <div class="container marginbot-50">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
@@ -105,7 +206,93 @@
             </div>
         </div>
     </div>
+</section>*@
+<!-- Section: about -->
+<section id="about" class="home-section color-dark bg-white">
+    <div class="container marginbot-50">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="animatedParent">
+                    <div class="section-heading text-center animated bounceInDown">
+                        <h2 class="h-bold">關於</h2>
+                        <div class="divider-header"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+
+
+        <div class="row">
+
+
+            <div class="col-lg-8 col-lg-offset-2 animatedParent">
+
+                @* 介紹 *@
+
+                進口零食讓您在家，瀏覽現今時下最新、最流行的各式零食，不需要花費時間與體力去尋找傳說中的異國美食，輕鬆一鍵便能瀏覽世界各地超夯零食，沒有地區時差的問題，只要簡單步驟就能以優惠的價格獲得品嘗美味零食的幸福！
+
+                @* 介紹結束 *@
+                @*<div class="text-center">
+                        <p>
+                            Lorem ipsum dolor sit amet, vis tale malis tacimates et, graece doctus omnesque ne est, deserunt
+                            pertinacia ne nam. Pro eu simul affert referrentur, natum mutat erroribus te his
+                        </p>
+                        <p>
+                            Ne mundi fabulas corrumpit vim, nulla vivendum conceptam eu nam. Ius ex principes complectitur, ex quo
+                            duis suscipit. Ius fastidii reprimique no. Sadipscing appellantur pri ad. Oratio moderatius definitiones
+                            cum ex, mea ne brute vivendum percipitur.
+                        </p>
+                        <a href="#service" class="btn btn-skin btn-scroll">What we do</a>
+                    </div>*@
+            </div>
+
+
+        </div>
+    </div>
+
 </section>
+
+
+<!-- Section: contact -->
+<section id="contact" class="home-section color-dark bg-white">
+    <div class="container marginbot-20">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="animatedParent">
+                    <div class="section-heading text-center animated bounceInDown">
+                        <h2 class="h-bold">聯絡資訊</h2>
+                        <div class="divider-header"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+
+
+        <div class="row">
+
+
+            <div class="col-lg-8 col-lg-offset-2 animatedParent">
+                <address>
+                    公司名稱： J.K. SNACKs有限公司<br />
+                    服務電話： 03 464 1162<br />
+                    商店地址： 326桃園市楊梅區幼獅路二段3號
+                </address>
+            </div>
+
+
+        </div>
+    </div>
+
+</section>
+<!-- /Section: about -->
 <!-- /Section: services -->
 @*<div class="jumbotron">
         <h1>ASP.NET</h1>

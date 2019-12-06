@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebSnack.Models;
+using upload;
 
 namespace WebSnack.Controllers
 {
@@ -14,7 +14,7 @@ namespace WebSnack.Controllers
 
         public ActionResult Index()
         {
-            var goods = db.z_bas_goods.ToList();
+            var goods = db.z_bas_goods.Where(m => m.mtype == 1).ToList();
 
             if (Request.IsAuthenticated)
             {
@@ -24,6 +24,7 @@ namespace WebSnack.Controllers
 
         }
 
+        [Authorize]
         public ActionResult ShoppingCar()
         {
             string userid = User.Identity.GetUserName();
@@ -61,6 +62,7 @@ namespace WebSnack.Controllers
             return RedirectToAction("orderList");
         }
 
+        [Authorize]
         public ActionResult AddCar(string mno)
         {
             string userid = User.Identity.GetUserName();
@@ -88,6 +90,17 @@ namespace WebSnack.Controllers
             return RedirectToAction("ShoppingCar");
         }
 
+        public ActionResult UpdateCar(string mno, int qty)
+        {
+            string userid = User.Identity.GetUserName();
+            var currentCar = db.z_bas_orders_d.Where(m => m.gno == mno && m.mIsApproved == "否" && m.userid == userid).FirstOrDefault();
+            currentCar.qty = qty;
+            db.SaveChanges();
+
+            return RedirectToAction("ShoppingCar");
+        }
+
+        [Authorize]
         public ActionResult DeleteCar(int rowid)
         {
             var orderDetail = db.z_bas_orders_d.Where(m => m.rowid == rowid).FirstOrDefault();
@@ -98,6 +111,56 @@ namespace WebSnack.Controllers
             return RedirectToAction("ShoppingCar");
         }
 
+        public ActionResult GoodsList(int typeid = 1)
+        {
+            ViewBag.TypeName = db.z_bas_goods_type.Where(m => m.rowid == typeid).FirstOrDefault().mname;
+
+            CVMGoodsType vm = new CVMGoodsType()
+            {
+                gtype = db.z_bas_goods_type.ToList(),
+                goods = db.z_bas_goods.Where(m => m.mtype == typeid).ToList()
+            };
+            if (Request.IsAuthenticated)
+            {
+                return View("GoodsList", "_LayoutMember", vm);
+            }
+            return View("GoodsList", "_Layout", vm);
+        }
+
+        [Authorize(Roles = "administrator")]
+        public ActionResult GoodsCreate()
+        {
+            var goodtype = db.z_bas_goods_type.ToList();
+            return View("GoodsCreate", "_LayoutMember", goodtype);
+        }
+
+        [HttpPost]
+        public ActionResult GoodsCreate(z_bas_goods goods, HttpPostedFileBase photo)
+        {
+            try
+            {
+                using (ezFileUpload upload = new ezFileUpload("~/img/goods"))
+                {
+
+                    upload.SaveUploadFile(photo);
+
+                }
+                goods.mimg = photo.FileName;
+                db.z_bas_goods.Add(goods);
+                db.SaveChanges();
+
+                return RedirectToAction("GoodsList", new { typeid = goods.mtype });
+            }
+            catch (Exception)
+            {
+
+            }
+            return View(goods);
+        }
+
+
+
+        [Authorize]
         public ActionResult OrderList()
         {
             string userid = User.Identity.GetUserName();

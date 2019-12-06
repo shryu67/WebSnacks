@@ -164,6 +164,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APP_Class\upload.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -185,8 +186,12 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CVMGoodsType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Metadata\z_bas_goods.cs" />
+    <Compile Include="Models\Metadata\z_bas_orders.cs" />
+    <Compile Include="Models\Metadata\z_bas_orders_d.cs" />
     <Compile Include="Models\SnackDBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -203,6 +208,9 @@
       <DependentUpon>SnackDBModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\z_bas_goods.cs">
+      <DependentUpon>SnackDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\z_bas_goods_type.cs">
       <DependentUpon>SnackDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\z_bas_orders.cs">
@@ -410,7 +418,54 @@
     <Content Include="Content\Site.css" />
     <Content Include="img\bullet.png" />
     <Content Include="img\cbp-sprite.png" />
+    <Content Include="img\goods\candy02.png" />
+    <Content Include="img\goods\candy03.jpg" />
+    <Content Include="img\goods\candy04.jpg" />
+    <Content Include="img\goods\candy05.jpg" />
+    <Content Include="img\goods\candy06.jpg" />
+    <Content Include="img\goods\candy07.jpg" />
+    <Content Include="img\goods\candy08.jpg" />
+    <Content Include="img\goods\candy09.jpg" />
+    <Content Include="img\goods\candy10.jpg" />
+    <Content Include="img\goods\choco01.jpg" />
+    <Content Include="img\goods\choco02.jpg" />
+    <Content Include="img\goods\choco03.jpg" />
+    <Content Include="img\goods\choco04.jpg" />
+    <Content Include="img\goods\choco05.jpg" />
+    <Content Include="img\goods\choco06.jpg" />
+    <Content Include="img\goods\choco07.jpg" />
+    <Content Include="img\goods\choco08.jpg" />
+    <Content Include="img\goods\choco09.jpg" />
+    <Content Include="img\goods\choco10.jpg" />
+    <Content Include="img\goods\candy01.jpg" />
+    <Content Include="img\goods\cookie01.jpg" />
+    <Content Include="img\goods\cookie02.jpg" />
+    <Content Include="img\goods\cookie03.jpg" />
+    <Content Include="img\goods\cookie04.jpg" />
+    <Content Include="img\goods\cookie05.jpg" />
+    <Content Include="img\goods\cookie06.jpg" />
+    <Content Include="img\goods\cookie07.jpg" />
+    <Content Include="img\goods\cookie08.png" />
+    <Content Include="img\goods\cookie09.jpg" />
+    <Content Include="img\goods\cookie10.jpg" />
     <Content Include="img\hero-bg.jpg" />
+    <Content Include="img\logo\facebook_cover_photo_1.png" />
+    <Content Include="img\logo\facebook_cover_photo_2.png" />
+    <Content Include="img\logo\facebook_profile_image.png" />
+    <Content Include="img\logo\favicon.png" />
+    <Content Include="img\logo\instagram_profile_image.png" />
+    <Content Include="img\logo\linkedin_banner_image_1.png" />
+    <Content Include="img\logo\linkedin_banner_image_2.png" />
+    <Content Include="img\logo\linkedin_profile_image.png" />
+    <Content Include="img\logo\logo.png" />
+    <Content Include="img\logo\logo_transparent.png" />
+    <Content Include="img\logo\pinterest_board_photo.png" />
+    <Content Include="img\logo\pinterest_profile_image.png" />
+    <Content Include="img\logo\twitter_header_photo_1.png" />
+    <Content Include="img\logo\twitter_header_photo_2.png" />
+    <Content Include="img\logo\twitter_profile_image.png" />
+    <Content Include="img\logo\youtube_profile_image.png" />
+    <Content Include="img\snacks-bg.jpg" />
     <Content Include="img\works\1.jpg" />
     <Content Include="img\works\2.jpg" />
     <Content Include="img\works\3.jpg" />
@@ -622,10 +677,11 @@
     <Content Include="Views\Home\ShoppingCar.cshtml" />
     <Content Include="Views\Home\OrderList.cshtml" />
     <Content Include="Views\Home\OrderDetail.cshtml" />
+    <Content Include="Views\Home\GoodsList.cshtml" />
+    <Content Include="Views\Home\GoodsCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Metadata\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
