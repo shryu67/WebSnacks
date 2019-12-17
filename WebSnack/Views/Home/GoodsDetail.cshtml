@@ -1,0 +1,31 @@
+﻿@model IEnumerable<WebSnack.Models.z_bas_goods>
+
+@*@{
+        Layout = null;
+    }*@
+@{
+    ViewBag.Title = "商品說明";
+}
+<section class="">
+    <div class="col-xs-10">
+
+        <h5>@ViewBag.goodsdetail.mname</h5>
+        <div class="row">
+            <div class="col-xs-2">
+                <div class="service-icon">
+                    <img src="~/img/goods/@ViewBag.goodsdetail.mimg" style="width:100%" />
+                </div>
+            </div>
+
+
+
+            @ViewBag.goodsdetail.qty_stock
+            <h2>單價：@Convert.ToInt32(ViewBag.goodsdetail.price_sale)</h2>
+            <h6>商品說明</h6>
+            @ViewBag.goodsdetail.remark
+
+
+        </div>
+
+    </div>
+</section>

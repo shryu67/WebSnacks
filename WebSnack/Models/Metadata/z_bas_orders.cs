@@ -22,6 +22,8 @@ namespace WebSnack.Models
 
             [DisplayName("會員帳號")]
             public string userid { get; set; }
+
+            [DisplayName("總價")]
             public Nullable<decimal> totals { get; set; }
 
             [DisplayName("收件人姓名")]
@@ -36,6 +38,8 @@ namespace WebSnack.Models
             [DisplayName("收件人地址")]
             [Required]
             public string mAddress { get; set; }
+
+            [DisplayName("備註")]
             public string remark { get; set; }
         }
     }

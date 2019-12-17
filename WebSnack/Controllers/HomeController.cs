@@ -12,6 +12,8 @@ namespace WebSnack.Controllers
     {
         SnackDBEntities db = new SnackDBEntities();
 
+
+
         public ActionResult Index()
         {
             var goods = db.z_bas_goods.Where(m => m.mtype == 1).ToList();
@@ -90,6 +92,7 @@ namespace WebSnack.Controllers
             return RedirectToAction("ShoppingCar");
         }
 
+        [HttpPost]
         public ActionResult UpdateCar(string mno, int qty)
         {
             string userid = User.Identity.GetUserName();
@@ -97,7 +100,10 @@ namespace WebSnack.Controllers
             currentCar.qty = qty;
             db.SaveChanges();
 
-            return RedirectToAction("ShoppingCar");
+            currentCar.amounts = currentCar.price * qty;
+
+            return Json(currentCar);
+            //return RedirectToAction("ShoppingCar");
         }
 
         [Authorize]
@@ -158,6 +164,51 @@ namespace WebSnack.Controllers
             return View(goods);
         }
 
+        [Authorize(Roles = "administrator")]
+        public ActionResult GoodsEdit(string mno)
+        {
+            var goodsedit = db.z_bas_goods.Where(m => m.mno == mno).FirstOrDefault();
+            return View("GoodsEdit", "_LayoutMember", goodsedit);
+        }
+
+        [HttpPost]
+        public ActionResult GoodsEdit(string mno, string mname, decimal price_sale, string remark, HttpPostedFileBase photo)
+        {
+            try
+            {
+                using (ezFileUpload upload = new ezFileUpload("~/img/goods"))
+                {
+
+                    upload.SaveUploadFile(photo);
+
+                }
+                var goods = db.z_bas_goods.Where(m => m.mno == mno).FirstOrDefault();
+                goods.mname = mname;
+                goods.price_sale = price_sale;
+                goods.remark = remark;
+                goods.mimg = photo.FileName;
+                db.SaveChanges();
+
+                return RedirectToAction("GoodsList", new { typeid = goods.mtype });
+            }
+            catch (Exception)
+            {
+
+            }
+            return View();
+        }
+
+        public ActionResult GoodsDetail(string mno)
+        {
+            var goodsdetail = db.z_bas_goods.Where(m => m.mno == mno).FirstOrDefault();
+            ViewBag.goodsdetail = goodsdetail;
+            if (Request.IsAuthenticated)
+            {
+                return View("GoodsDetail", "_LayoutMember");
+            }
+            return View("GoodsDetail", "_Layout");
+        }
+
 
 
         [Authorize]
@@ -190,5 +241,10 @@ namespace WebSnack.Controllers
 
             return View();
         }
+
+
+
+
+
     }
 }

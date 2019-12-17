@@ -31,7 +31,11 @@ namespace WebSnack.Models
 
             [DisplayName("訂購數量")]
             public Nullable<decimal> qty { get; set; }
+
+            [DisplayName("小計")]
             public Nullable<decimal> amounts { get; set; }
+
+            [DisplayName("備註")]
             public string remark { get; set; }
 
             [DisplayName("是否為訂單")]

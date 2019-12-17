@@ -237,6 +237,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\color\default.css" />
+    <Content Include="Content\easyslick\slick-theme.css" />
+    <Content Include="Content\easyslick\slick.css" />
+    <Content Include="Content\easyslick\text.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -260,6 +263,14 @@
     <Content Include="Content\nivo-lightbox-theme\default\prev.png" />
     <Content Include="Content\nivo-lightbox.css" />
     <Content Include="Content\style.css" />
+    <Content Include="easyslick-1.8.1\.gitignore" />
+    <Content Include="easyslick-1.8.1\index.html" />
+    <Content Include="easyslick-1.8.1\slick\ajax-loader.gif" />
+    <Content Include="easyslick-1.8.1\slick\fonts\slick.svg" />
+    <Content Include="easyslick-1.8.1\slick\slick-theme.css" />
+    <Content Include="easyslick-1.8.1\slick\slick.css" />
+    <Content Include="easyslick-1.8.1\slick\slick.js" />
+    <Content Include="easyslick-1.8.1\slick\slick.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Flattern\404.html" />
     <Content Include="Flattern\about.html" />
@@ -414,8 +425,10 @@
     <Content Include="Flattern\testimonials.html" />
     <Content Include="Flattern\typography.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\slick.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\bg_play_pause.png" />
     <Content Include="img\bullet.png" />
     <Content Include="img\cbp-sprite.png" />
     <Content Include="img\goods\candy02.png" />
@@ -449,6 +462,11 @@
     <Content Include="img\goods\cookie09.jpg" />
     <Content Include="img\goods\cookie10.jpg" />
     <Content Include="img\hero-bg.jpg" />
+    <Content Include="img\WooCommerce\kitchen_adventurer_caramel.jpg" />
+    <Content Include="img\WooCommerce\kitchen_adventurer_cheesecake_brownie.jpg" />
+    <Content Include="img\WooCommerce\kitchen_adventurer_donut.jpg" />
+    <Content Include="img\WooCommerce\kitchen_adventurer_lemon.jpg" />
+    <Content Include="img\WooCommerce\logo.png" />
     <Content Include="img\logo\facebook_cover_photo_1.png" />
     <Content Include="img\logo\facebook_cover_photo_2.png" />
     <Content Include="img\logo\facebook_profile_image.png" />
@@ -474,6 +492,7 @@
     <Content Include="img\works\6.jpg" />
     <Content Include="img\works\7.jpg" />
     <Content Include="img\works\8.jpg" />
+    <Content Include="index.html" />
     <Content Include="Models\SnackDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SnackDBModel.edmx</DependentUpon>
@@ -536,9 +555,31 @@
     <Content Include="Models\SnackDBModel.edmx.diagram">
       <DependentUpon>SnackDBModel.edmx</DependentUpon>
     </Content>
+    <Content Include="easyslick-1.8.1\bower.json" />
+    <Content Include="easyslick-1.8.1\component.json" />
+    <Content Include="easyslick-1.8.1\CONTRIBUTING.markdown" />
+    <Content Include="easyslick-1.8.1\ISSUE_TEMPLATE.md" />
+    <Content Include="easyslick-1.8.1\LICENSE" />
+    <Content Include="easyslick-1.8.1\Makefile" />
+    <Content Include="easyslick-1.8.1\package.json" />
+    <Content Include="easyslick-1.8.1\README.markdown" />
+    <Content Include="easyslick-1.8.1\slick.jquery.json" />
+    <Content Include="easyslick-1.8.1\slick\config.rb" />
+    <Content Include="easyslick-1.8.1\slick\fonts\slick.eot" />
+    <Content Include="easyslick-1.8.1\slick\fonts\slick.ttf" />
+    <Content Include="easyslick-1.8.1\slick\fonts\slick.woff" />
+    <Content Include="easyslick-1.8.1\slick\slick-theme.less" />
+    <Content Include="easyslick-1.8.1\slick\slick-theme.scss" />
+    <Content Include="easyslick-1.8.1\slick\slick.less" />
+    <Content Include="easyslick-1.8.1\slick\slick.scss" />
+    <Content Include="fonts\slick.eot" />
+    <Content Include="fonts\slick.ttf" />
+    <Content Include="fonts\slick.woff" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\css3-animate-it.js" />
     <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\easyslick\jquery-2.2.0.min.js" />
+    <Content Include="Scripts\easyslick\slick.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -546,6 +587,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.appear.js" />
+    <Content Include="Scripts\jquery.cycle.all.js" />
     <Content Include="Scripts\jquery.easing.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.scrollTo.js" />
@@ -677,11 +719,15 @@
     <Content Include="Views\Home\ShoppingCar.cshtml" />
     <Content Include="Views\Home\OrderList.cshtml" />
     <Content Include="Views\Home\OrderDetail.cshtml" />
-    <Content Include="Views\Home\GoodsList.cshtml" />
     <Content Include="Views\Home\GoodsCreate.cshtml" />
+    <Content Include="Views\Home\_slick.cshtml" />
+    <Content Include="Views\Home\GoodsDetail.cshtml" />
+    <Content Include="Views\Home\GoodsList.cshtml" />
+    <Content Include="Views\Home\GoodsEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

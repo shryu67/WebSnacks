@@ -1,0 +1,56 @@
+﻿@model WebSnack.Models.z_bas_goods
+
+@{
+    ViewBag.Title = "商品修改";
+}
+
+<h2 class="home-section">商品修改</h2>
+<form method="post" action="@Url.Action("GoodsEdit")" enctype="multipart/form-data">
+    <div class="form-horizontal">
+        <hr />
+        @Html.HiddenFor(model => model.mno)
+        <div class="form-group">
+            <label class="control-label col-md-2">商品名稱</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.mname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.mname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            <label class="control-label col-md-2">商品分類</label>
+            <div class="col-md-10">
+                @Html.ValidationMessageFor(model => model.mtype, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            <label for="price_sale" class="control-label col-md-2">單價</label>
+            <div class="col-md-10">
+                <input type="text" id="price_sale" name="price_sale" value="@Convert.ToInt32(Model.price_sale)" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">商品圖示</label>
+            <div class="col-md-10">
+                <img src="~/img/goods/@Model.mimg" style="width:20%" />
+                <input type="file" id="photo" name="photo" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="remark" class="control-label col-md-2">商品說明</label>
+            <div class="col-md-10">
+                <input type="text" id="remark" name="remark" value="@Model.remark" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="修改" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+

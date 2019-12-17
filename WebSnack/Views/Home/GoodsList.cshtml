@@ -35,32 +35,34 @@
                         <div class="row animatedParent">
                             @foreach (var item in Model.goods)
                             {
-                                <div class="col-md-4 margintop-40">
-                                    <div class="animated rotateInDownLeft">
-                                        <div class="service-box">
-                                            <div class="service-icon">
-                                                <img src="~/img/goods/@item.mimg" style="width:70%" />
-                                            </div>
-                                            <div class="service-desc">
-                                                <h5>@item.mname</h5>
-                                                <div class="divider-header"></div>
-                                                @*<p>
-                                                        Ad denique euripidis signiferumque vim, iusto admodum quo cu. No tritani neglegentur mediocritatem
-                                                        duo.
-                                                    </p>*@
-                                                <p>單價:@Convert.ToInt32(item.price_sale)</p>
-                                                @if (Request.IsAuthenticated)
-                                                {
-                                                    <p><a href="@Url.Action("AddCar")?mno=@item.mno" class="btn btn-skin">加入購物車</a></p>
-                                                }
-                                                else
-                                                {
-                                                    <p></p>
-                                                }
+                                <a href="@Url.Action("GoodsDetail","Home",new { mno = item.mno } )">
+                                    <div class="col-md-4 margintop-40">
+                                        <div class="animated rotateInDownLeft">
+                                            <div class="service-box">
+                                                <div class="service-icon">
+                                                    <img src="~/img/goods/@item.mimg" style="width:70%" />
+                                                </div>
+                                                <div class="service-desc">
+                                                    <h5>@item.mname</h5>
+                                                    <div class="divider-header"></div>
+                                                    <p>單價:@Convert.ToInt32(item.price_sale)</p>
+                                                    @if (Request.IsAuthenticated)
+                                                    {
+                                                        <p><a href="@Url.Action("AddCar")?mno=@item.mno" class="btn btn-skin">加入購物車</a></p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p></p>
+                                                    }
+                                                    @if (User.IsInRole("administrator"))
+                                                    {
+                                                        <p><a href="@Url.Action("GoodsEdit")?mno=@item.mno" class="btn btn-skin">商品修改</a></p>
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             }
                         </div>
                     </div>

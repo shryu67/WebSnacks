@@ -7,6 +7,7 @@
     <title>@ViewBag.Title - J.K.SNACKs</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
 
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -36,6 +37,10 @@
                                 <li><a href="@Url.Action("Index", "Home")#about">關於</a></li>
                                 @*<li>@Html.ActionLink("連絡人", "Contact", "Home")</li>*@
                                 <li><a href="@Url.Action("Index", "Home")#contact">聯絡資訊</a></li>
+                                <li><a href="@Url.Action("Index", "Home")#payment">付款方式</a></li>
+                                <li><a href="@Url.Action("Index", "Home")#delivery">運送方式</a></li>
+                                <li><a href="@Url.Action("Index", "Home")#return">退貨說明</a></li>
+                                <li><a href="@Url.Action("Index", "Home")#law">會員權益與隱私</a></li>
                             </ul>
                             @Html.Partial("_LoginPartial")
                         </div>
@@ -78,7 +83,7 @@
     </footer>
     @*</div>*@
 
-    @Scripts.Render("~/bundles/jquery")
+
     @Scripts.Render("~/bundles/js")
     @Scripts.Render("~/bundles/bootstrap")
     <script type="text/javascript">

@@ -2,18 +2,24 @@
 <script src="~/Scripts/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-        //var id = $(this).prop("id").split("_")[1];
-        //console.log(id);
-        $("select#qty").change(function () {
-            alert($("#mno").val());
-            @*var mno = @*@
-            var qty = $("select#qty").val();
-            $.ajax({
-                type: "POST",
-                url: "/Home/UpdateCar",
+        $("select").click(function () {
+            var id = $(this).prop("id").split("_")[1];
+            //console.log(id);
+            $("select#qty_" + id).change(function () {
+                //alert($("#mno_" + id).val());
+                var SCmno = $("#mno_" + id).val();
+                var SCqty = $("select#qty_" + id).val();
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/UpdateCar",
+                    data: { mno: SCmno, qty: SCqty },
+                    success: function (data) {
+                        $("#amo_" + id).text(data.amounts + " 元");
+                    }
+                })
 
             })
-        })
+        });
     })
 </script>
 @{
@@ -27,7 +33,7 @@
     </p>*@
 <table class="table">
     <tr>
-        @if (Request.IsAuthenticated)
+        @if (User.IsInRole("administrator"))
         {
             <th>
                 @Html.DisplayNameFor(model => model.mno)
@@ -54,16 +60,19 @@
         @*<th>
                 @Html.DisplayNameFor(model => model.remark)
             </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.mIsApproved)
-        </th>
+        @if (User.IsInRole("administrator"))
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.mIsApproved)
+            </th>
+        }
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            @if (Request.IsAuthenticated)
+            @if (User.IsInRole("administrator"))
             {
                 <td>
                     @Html.DisplayFor(modelItem => item.mno)
@@ -73,9 +82,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.gno)
-                    @Html.Hidden("mno" + item.rowid, item.gno)
                 </td>
             }
+            @Html.Hidden("mno_" + item.rowid, item.gno)
             <td>
                 @Html.DisplayFor(modelItem => item.gname)
             </td>
@@ -91,15 +100,18 @@
                     }
                 </select>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.amounts)
+            <td id="amo_@item.rowid">
+                @Convert.ToInt32(item.amounts) 元
             </td>
             @*<td>
                     @Html.DisplayFor(modelItem => item.remark)
                 </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.mIsApproved)
-            </td>
+            @if (User.IsInRole("administrator"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.mIsApproved)
+                </td>
+            }
             <td>
                 @*@Html.ActionLink("Edit", "Edit", new { id = item.rowid }) |
                     @Html.ActionLink("Details", "Details", new { id = item.rowid }) |
