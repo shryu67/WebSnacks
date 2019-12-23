@@ -9,6 +9,7 @@
                 //alert($("#mno_" + id).val());
                 var SCmno = $("#mno_" + id).val();
                 var SCqty = $("select#qty_" + id).val();
+                //var SCprice = $("#price_" + id).val();
                 $.ajax({
                     type: "POST",
                     url: "/Home/UpdateCar",
@@ -17,7 +18,7 @@
                         $("#amo_" + id).text(data.amounts + " 元");
                     }
                 })
-
+                //$("#amo_" + id).text(SCqty*SCprice + " 元");
             })
         });
     })
@@ -28,9 +29,9 @@
 
 <h2 class="home-section">會員購物車清單</h2>
 
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
+<p class="text-right">
+        @Html.ActionLink("繼續其他購物", "GoodsList")
+    </p>
 <table class="table">
     <tr>
         @if (User.IsInRole("administrator"))
@@ -90,6 +91,7 @@
             </td>
             <td>
                 @Convert.ToInt32(item.price) 元
+                @*@Html.Hidden("price_" + item.rowid, item.price)*@
             </td>
             <td>
                 數量

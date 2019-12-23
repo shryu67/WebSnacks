@@ -9,6 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
 
+
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 
@@ -37,10 +38,6 @@
                                 <li><a href="@Url.Action("Index", "Home")#about">關於</a></li>
                                 @*<li>@Html.ActionLink("連絡人", "Contact", "Home")</li>*@
                                 <li><a href="@Url.Action("Index", "Home")#contact">聯絡資訊</a></li>
-                                <li><a href="@Url.Action("Index", "Home")#payment">付款方式</a></li>
-                                <li><a href="@Url.Action("Index", "Home")#delivery">運送方式</a></li>
-                                <li><a href="@Url.Action("Index", "Home")#return">退貨說明</a></li>
-                                <li><a href="@Url.Action("Index", "Home")#law">會員權益與隱私</a></li>
                             </ul>
                             @Html.Partial("_LoginPartial")
                         </div>
@@ -66,11 +63,6 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3 text-center">
-                    <a href="#about" class="learn-more-btn btn-scroll">Learn more</a>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -79,6 +71,13 @@
     @RenderBody()
     <hr />
     <footer>
+        <ul>
+            <li>@Html.ActionLink("付款方式", "Payment", "Home")</li>
+            <li>@Html.ActionLink("運送方式", "Delivery", "Home")</li>
+            <li>@Html.ActionLink("退換貨說明", "Returns", "Home")</li>
+            <li>@Html.ActionLink("會員權益與隱私", "MemberLaw", "Home")</li>
+            <li>@Html.ActionLink("客服問答", "CustomerAsk", "Home")</li>
+        </ul>
         <p>&copy; @DateTime.Now.Year - J.K. SNACKs</p>
     </footer>
     @*</div>*@

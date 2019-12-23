@@ -198,6 +198,15 @@ namespace WebSnack.Controllers
             return View();
         }
 
+        [Authorize(Roles = "administrator")]
+        public ActionResult GoodsDelete(string mno)
+        {
+            var goods = db.z_bas_goods.Where(m => m.mno == mno).FirstOrDefault();
+            db.z_bas_goods.Remove(goods);
+            db.SaveChanges();
+            return RedirectToAction("GoodsList", new { typeid = goods.mtype });
+        }
+
         public ActionResult GoodsDetail(string mno)
         {
             var goodsdetail = db.z_bas_goods.Where(m => m.mno == mno).FirstOrDefault();
@@ -216,11 +225,20 @@ namespace WebSnack.Controllers
         {
             string userid = User.Identity.GetUserName();
 
-            var orders = db.z_bas_orders.Where(m => m.userid == userid).OrderByDescending(m => m.mdate).ToList();
+            if (User.IsInRole("administrator"))
+            {
+                var orders = db.z_bas_orders.OrderByDescending(m => m.userid).ThenBy(m => m.mdate).ToList();
+                return View("OrderList", "_LayoutMember", orders);
+            }
+            else
+            {
+                var orders = db.z_bas_orders.Where(m => m.userid == userid).OrderByDescending(m => m.mdate).ToList();
+                return View("OrderList", "_LayoutMember", orders);
+            }
 
-            return View("OrderList", "_LayoutMember", orders);
         }
 
+        [Authorize]
         public ActionResult OrderDetail(string mno)
         {
             var orderDetails = db.z_bas_orders_d.Where(m => m.mno == mno).ToList();
@@ -242,7 +260,53 @@ namespace WebSnack.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 新頁面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CustomerAsk()
+        {
+            if (Request.IsAuthenticated)
+            {
+                return View("CustomerAsk", "_LayoutMember");
+            }
+            return View("CustomerAsk", "_Layout");
 
+        }
+
+        public ActionResult Payment()
+        {
+            if (Request.IsAuthenticated)
+            {
+                return View("Payment", "_LayoutMember");
+            }
+            return View("Payment", "_Layout");
+        }
+
+        public ActionResult Delivery()
+        {
+            if (Request.IsAuthenticated)
+            {
+                return View("Delivery", "_LayoutMember");
+            }
+            return View("Delivery", "_Layout");
+        }
+        public ActionResult Returns()
+        {
+            if (Request.IsAuthenticated)
+            {
+                return View("Returns", "_LayoutMember");
+            }
+            return View("Returns", "_Layout");
+        }
+        public ActionResult MemberLaw()
+        {
+            if (Request.IsAuthenticated)
+            {
+                return View("MemberLaw", "_LayoutMember");
+            }
+            return View("MemberLaw", "_Layout");
+        }
 
 
 
