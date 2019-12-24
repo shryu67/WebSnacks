@@ -1,0 +1,75 @@
+﻿@model WebSnack.Models.CVMGoodsType
+
+@{
+    ViewBag.Title = "商品列表";
+}
+
+<section id="service" class="home-section color-dark bg-gray">
+    <h2 class="h-bold">商品列表</h2>
+
+    <div class="row">
+        <div class="col-lg-2">
+            @foreach (var item in Model.gtype)
+            {
+                <p>@Html.ActionLink(item.mname, "GoodsList", new { typeid = item.rowid })</p>
+            }
+        </div>
+        <div class="col-lg-10">
+            <!-- Section: services -->
+            <section id="service" class="home-section color-dark bg-gray">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div>
+                                <div class="section-heading text-center">
+                                    <h2 class="h-bold">@ViewBag.TypeName</h2>
+                                    <div class="divider-header"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="text-center">
+                    <div class="container">
+                        <div class="row animatedParent">
+                            @foreach (var item in Model.goods)
+                            {
+                                <a href="@Url.Action("GoodsDetail","Home",new { mno = item.mno } )#service">
+                                    <div class="col-md-4 margintop-40">
+                                        <div class="animated rotateInDownLeft">
+                                            <div class="service-box">
+                                                <div class="service-icon">
+                                                    <img src="~/img/goods/@item.mimg" style="width:70%" />
+                                                </div>
+                                                <div class="service-desc">
+                                                    <h5>@item.mname</h5>
+                                                    <div class="divider-header"></div>
+                                                    <p>單價:@Convert.ToInt32(item.price_sale)</p>
+                                                    @if (Request.IsAuthenticated)
+                                                    {
+                                                        <p><a href="@Url.Action("AddCar")?mno=@item.mno" class="btn btn-skin">加入購物車</a></p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p></p>
+                                                    }
+                                                    @if (User.IsInRole("administrator"))
+                                                    {
+                                                        <p><a href="@Url.Action("GoodsEdit")?mno=@item.mno" class="btn btn-skin">商品修改</a>
+                                                        @Html.ActionLink("刪除", "GoodsDelete", new { mno = item.mno }, new { onclick = "return confirm('確定刪除嗎?');", @class="btn btn-danger" })</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /Section: services -->
+        </div>
+    </div>
+</section>

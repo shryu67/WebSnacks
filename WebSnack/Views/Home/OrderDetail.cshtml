@@ -7,13 +7,16 @@
 <h2>訂單明細</h2>
 
 @*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.mno)
-        </th>
+        @if (User.IsInRole("administrator"))
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.mno)
+            </th>
+        }
         <th>
             @Html.DisplayNameFor(model => model.userid)
         </th>
@@ -35,47 +38,57 @@
         <th>
             @Html.DisplayNameFor(model => model.remark)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mIsApproved)
-        </th>
+        @if (User.IsInRole("administrator"))
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.mIsApproved)
+            </th>
+        }
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.mno)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.userid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gno)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.qty)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.amounts)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.remark)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.mIsApproved)
-        </td>
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.rowid }) |
-            @Html.ActionLink("Details", "Details", new { id=item.rowid }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.rowid })
-        </td>*@
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            @if (User.IsInRole("administrator"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.mno)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.userid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gname)
+            </td>
+            <td>
+                @Convert.ToInt32(item.price) 元
+            </td>
+            <td>
+                @Convert.ToInt32(item.qty)
+            </td>
+            <td>
+                @Convert.ToInt32(item.amounts) 元
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.remark)
+            </td>
+            @if (User.IsInRole("administrator"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.mIsApproved)
+                </td>
+            }
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.rowid }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.rowid }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.rowid })
+                </td>*@
+        </tr>
+    }
 
 </table>

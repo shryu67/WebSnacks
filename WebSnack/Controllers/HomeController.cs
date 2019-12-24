@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebSnack.Models;
+using upload;
 
 namespace WebSnack.Controllers
 {
@@ -12,9 +12,11 @@ namespace WebSnack.Controllers
     {
         SnackDBEntities db = new SnackDBEntities();
 
+
+
         public ActionResult Index()
         {
-            var goods = db.z_bas_goods.ToList();
+            var goods = db.z_bas_goods.Where(m => m.mtype == 1).ToList();
 
             if (Request.IsAuthenticated)
             {
@@ -24,6 +26,7 @@ namespace WebSnack.Controllers
 
         }
 
+        [Authorize]
         public ActionResult ShoppingCar()
         {
             string userid = User.Identity.GetUserName();
@@ -61,6 +64,7 @@ namespace WebSnack.Controllers
             return RedirectToAction("orderList");
         }
 
+        [Authorize]
         public ActionResult AddCar(string mno)
         {
             string userid = User.Identity.GetUserName();
@@ -88,6 +92,21 @@ namespace WebSnack.Controllers
             return RedirectToAction("ShoppingCar");
         }
 
+        [HttpPost]
+        public ActionResult UpdateCar(string mno, int qty)
+        {
+            string userid = User.Identity.GetUserName();
+            var currentCar = db.z_bas_orders_d.Where(m => m.gno == mno && m.mIsApproved == "否" && m.userid == userid).FirstOrDefault();
+            currentCar.qty = qty;
+            db.SaveChanges();
+
+            currentCar.amounts = currentCar.price * qty;
+
+            return Json(currentCar);
+            //return RedirectToAction("ShoppingCar");
+        }
+
+        [Authorize]
         public ActionResult DeleteCar(int rowid)
         {
             var orderDetail = db.z_bas_orders_d.Where(m => m.rowid == rowid).FirstOrDefault();
@@ -98,15 +117,128 @@ namespace WebSnack.Controllers
             return RedirectToAction("ShoppingCar");
         }
 
+        public ActionResult GoodsList(int typeid = 1)
+        {
+            ViewBag.TypeName = db.z_bas_goods_type.Where(m => m.rowid == typeid).FirstOrDefault().mname;
+
+            CVMGoodsType vm = new CVMGoodsType()
+            {
+                gtype = db.z_bas_goods_type.ToList(),
+                goods = db.z_bas_goods.Where(m => m.mtype == typeid).ToList()
+            };
+            if (Request.IsAuthenticated)
+            {
+                return View("GoodsList", "_LayoutMember", vm);
+            }
+            return View("GoodsList", "_Layout", vm);
+        }
+
+        [Authorize(Roles = "administrator")]
+        public ActionResult GoodsCreate()
+        {
+            var goodtype = db.z_bas_goods_type.ToList();
+            return View("GoodsCreate", "_LayoutMember", goodtype);
+        }
+
+        [HttpPost]
+        public ActionResult GoodsCreate(z_bas_goods goods, HttpPostedFileBase photo)
+        {
+            try
+            {
+                using (ezFileUpload upload = new ezFileUpload("~/img/goods"))
+                {
+
+                    upload.SaveUploadFile(photo);
+
+                }
+                goods.mimg = photo.FileName;
+                db.z_bas_goods.Add(goods);
+                db.SaveChanges();
+
+                return RedirectToAction("GoodsList", new { typeid = goods.mtype });
+            }
+            catch (Exception)
+            {
+
+            }
+            return View(goods);
+        }
+
+        [Authorize(Roles = "administrator")]
+        public ActionResult GoodsEdit(string mno)
+        {
+            var goodsedit = db.z_bas_goods.Where(m => m.mno == mno).FirstOrDefault();
+            return View("GoodsEdit", "_LayoutMember", goodsedit);
+        }
+
+        [HttpPost]
+        public ActionResult GoodsEdit(string mno, string mname, decimal price_sale, string remark, HttpPostedFileBase photo)
+        {
+            try
+            {
+                using (ezFileUpload upload = new ezFileUpload("~/img/goods"))
+                {
+
+                    upload.SaveUploadFile(photo);
+
+                }
+                var goods = db.z_bas_goods.Where(m => m.mno == mno).FirstOrDefault();
+                goods.mname = mname;
+                goods.price_sale = price_sale;
+                goods.remark = remark;
+                goods.mimg = photo.FileName;
+                db.SaveChanges();
+
+                return RedirectToAction("GoodsList", new { typeid = goods.mtype });
+            }
+            catch (Exception)
+            {
+
+            }
+            return View();
+        }
+
+        [Authorize(Roles = "administrator")]
+        public ActionResult GoodsDelete(string mno)
+        {
+            var goods = db.z_bas_goods.Where(m => m.mno == mno).FirstOrDefault();
+            db.z_bas_goods.Remove(goods);
+            db.SaveChanges();
+            return RedirectToAction("GoodsList", new { typeid = goods.mtype });
+        }
+
+        public ActionResult GoodsDetail(string mno)
+        {
+            var goodsdetail = db.z_bas_goods.Where(m => m.mno == mno).FirstOrDefault();
+            ViewBag.goodsdetail = goodsdetail;
+            if (Request.IsAuthenticated)
+            {
+                return View("GoodsDetail", "_LayoutMember");
+            }
+            return View("GoodsDetail", "_Layout");
+        }
+
+
+
+        [Authorize]
         public ActionResult OrderList()
         {
             string userid = User.Identity.GetUserName();
 
-            var orders = db.z_bas_orders.Where(m => m.userid == userid).OrderByDescending(m => m.mdate).ToList();
+            if (User.IsInRole("administrator"))
+            {
+                var orders = db.z_bas_orders.OrderByDescending(m => m.userid).ThenBy(m => m.mdate).ToList();
+                return View("OrderList", "_LayoutMember", orders);
+            }
+            else
+            {
+                var orders = db.z_bas_orders.Where(m => m.userid == userid).OrderByDescending(m => m.mdate).ToList();
+                return View("OrderList", "_LayoutMember", orders);
+            }
 
-            return View("OrderList", "_LayoutMember", orders);
         }
 
+        [Authorize]
         public ActionResult OrderDetail(string mno)
         {
             var orderDetails = db.z_bas_orders_d.Where(m => m.mno == mno).ToList();
@@ -127,5 +259,56 @@ namespace WebSnack.Controllers
 
             return View();
         }
+
+        /// <summary>
+        /// 新頁面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CustomerAsk()
+        {
+            if (Request.IsAuthenticated)
+            {
+                return View("CustomerAsk", "_LayoutMember");
+            }
+            return View("CustomerAsk", "_Layout");
+
+        }
+
+        public ActionResult Payment()
+        {
+            if (Request.IsAuthenticated)
+            {
+                return View("Payment", "_LayoutMember");
+            }
+            return View("Payment", "_Layout");
+        }
+
+        public ActionResult Delivery()
+        {
+            if (Request.IsAuthenticated)
+            {
+                return View("Delivery", "_LayoutMember");
+            }
+            return View("Delivery", "_Layout");
+        }
+        public ActionResult Returns()
+        {
+            if (Request.IsAuthenticated)
+            {
+                return View("Returns", "_LayoutMember");
+            }
+            return View("Returns", "_Layout");
+        }
+        public ActionResult MemberLaw()
+        {
+            if (Request.IsAuthenticated)
+            {
+                return View("MemberLaw", "_LayoutMember");
+            }
+            return View("MemberLaw", "_Layout");
+        }
+
+
+
     }
 }

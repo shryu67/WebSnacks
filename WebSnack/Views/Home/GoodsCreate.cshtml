@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WebSnack.Models.z_bas_goods_type>
+
+@{
+    ViewBag.Title = "商品管理";
+}
+
+<h2 class="home-section">商品管理</h2>
+<form method="post" action="@Url.Action("GoodsCreate")" enctype="multipart/form-data">
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            <label for="mname" class="control-label col-md-2">商品名稱</label>
+            <div class="col-md-10">
+                <input type="text" id="mname" name="mname" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="mtype" class="control-label col-md-2">商品分類</label>
+            <div class="col-md-10">
+                <select id="mtype" name="mtype" class="form-control">
+                    @foreach (var item in Model)
+                    {
+                        <option value="@item.rowid">@item.mname</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="price_sale" class="control-label col-md-2">單價</label>
+            <div class="col-md-10">
+                <input type="text" id="price_sale" name="price_sale" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="photo" class="control-label col-md-2">商品圖示</label>
+            <div class="col-md-10">
+                <input type="file" id="photo" name="photo" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="remark" class="control-label col-md-2">商品說明</label>
+            <div class="col-md-10">
+                <input type="text" id="remark" name="remark" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="新增" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
